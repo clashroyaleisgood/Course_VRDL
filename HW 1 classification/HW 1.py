@@ -193,8 +193,8 @@ resnet152 = resnet152.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
 
-optimizer = optim.Adam(resnet152.parameters(), lr=LearningRate)
-print()
+optimizer = optim.Adam(resnet152.parameters(), lr=LearningRate, weight_decay=1e-5)
+# weight_decay: L2 regularization effect
 
 def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=25):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
