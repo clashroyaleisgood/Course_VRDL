@@ -25,7 +25,7 @@ RandomSeed = 99  # for train_test_split()
 
 # -----
 
-BatchSize = 300
+BatchSize = 64
 EpochCounts = 10
 NumWorkers = 2
 
@@ -46,6 +46,9 @@ AllLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/classes.txt'
 # Model Path
 ModelLoadPath = r'HW 1 classification/resnet152.pt'
 ModelSavePath = r'HW 1 classification/resnet152.pt'
+
+# History Path
+HistorySavePath = r'HW 1 classification/history.npy'
 
 # Collect Labels
 Labels = []  # List of Strings
@@ -197,6 +200,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f'to device: {device}')
     history = []
+    lowest_valid_loss = 100
  
     for epoch in range(epochs):
         print(f"Epoch: {epoch+1}/{epochs}")
@@ -280,14 +284,15 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
         history.append([avg_train_loss, avg_train_acc,
                         avg_valid_loss, avg_valid_acc])
 
-        print(f'Epoch: {epoch+1}, Loss: {avg_train_loss:.4f}, '+ \
+        print(f'Epoch: {epoch+1}, Loss: {avg_train_loss:.4f}, ' + \
               f'Accuracy: {avg_train_acc*100:.2f}%', end='')
-        print(f' - Validation, Loss: {avg_valid_loss:.4f}, '+ \
+        print(f' - Validation, Loss: {avg_valid_loss:.4f}, ' + \
                  f'Accuracy: {avg_valid_acc*100:.2f}%')
 
         # torch.save(model, ModelSavePath)
-        if epoch > 5 and history[-1][2] > history[-2][2]:
-            torch.save(model, ModelSavePath.split('.')[0]+f'_Epoch_{epoch+1}.pt')
+        if lowest_valid_loss > history[-1][2]:
+            lowest_valid_loss = history[-1][2]
+            torch.save(model, ModelSavePath)
     
     return model, history
 
@@ -325,3 +330,5 @@ def DisplayResult(history):
     plt.show()
 
 DisplayResult(history)
+np.save(HistorySavePath, np.array(history))
+
