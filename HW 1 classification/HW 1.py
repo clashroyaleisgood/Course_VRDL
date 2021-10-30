@@ -35,26 +35,28 @@ ClassCount = 200
 
 # ------------------------- PreRequirement          -------------------------
 # Data Path
-TrainPath = r'2021VRDL_HW1_datasets/training_images/'
-TestPath = r'2021VRDL_HW1_datasets/testing_images/'
+TrainPath = r'HW 1 classification/2021VRDL_HW1_datasets/training_images/'
+TestPath = r'HW 1 classification/2021VRDL_HW1_datasets/testing_images/'
 TrainFileName = os.listdir(TrainPath)  # ['1.jpg', '5.jpg', ...]
 TestFileName = os.listdir(TestPath)
 # TrainSize = len(TrainFileName)
+TrainLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/training_labels.txt'
+AllLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/classes.txt'
 
 # Model Path
-ModelLoadPath = r'resnet152.pt'
-ModelSavePath = r'resnet152.pt'
+ModelLoadPath = r'HW 1 classification/resnet152.pt'
+ModelSavePath = r'HW 1 classification/resnet152.pt'
 
 # Collect Labels
 Labels = []  # List of Strings
-with open('2021VRDL_HW1_datasets/classes.txt') as file:
+with open(AllLabelPath) as file:
     for line in file:
         # line = line.split('.')[1]
         Labels += [line.strip()]
 
 # Split Image Name by Classes
 # Use train_test_split
-def CollectTrainingData():
+def CollectTrainingData(train_data_label_path):
     '''
     return  X_train: ['1.jpg', '2.jpg', ...]
             X_validation: same as above...
@@ -63,7 +65,7 @@ def CollectTrainingData():
     '''
     X = []
     y = []
-    with open('2021VRDL_HW1_datasets/training_labels.txt') as file:
+    with open(train_data_label_path) as file:
 
         for line in file:
             image, classes = line.split()
@@ -77,7 +79,7 @@ def CollectTrainingData():
                             test_size=ValidationPercentage,
                             random_state=RandomSeed)
 
-X_train, X_valid, y_train, y_valid = CollectTrainingData()
+X_train, X_valid, y_train, y_valid = CollectTrainingData(TrainLabelPath)
 train_data_size = len(X_train)
 valid_data_size = len(X_valid)
 
