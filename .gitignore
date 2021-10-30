@@ -127,3 +127,19 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# --
+# Vscode Extension
+.vscode/
+
+# Dataset
+# HW 1 classification/2021VRDL_HW1_datasets/
+
+# !HW 1 classification/2021VRDL_HW1_datasets/classes.txt
+# !HW 1 classification/2021VRDL_HW1_datasets/testing_img_order
+# !HW 1 classification/2021VRDL_HW1_datasets/training_labels
+*.zip
+*.jpg
+
+# Model
+*.pt
