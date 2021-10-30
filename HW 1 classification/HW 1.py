@@ -271,7 +271,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
                   'Accuracy: {avg_valid_acc*100:.2f}%')
 
         # torch.save(model, ModelSavePath)
-        if history[-1][2] > history[-2][2]:
+        if epoch > 5 and history[-1][2] > history[-2][2]:
             torch.save(model, ModelSavePath.split('.')[0]+f'_Epoch_{epoch+1}.pt')
     
     return model, history
