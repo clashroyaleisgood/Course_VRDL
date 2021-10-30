@@ -89,8 +89,9 @@ valid_data_size = len(X_valid)
 # ------------------------- Dataset Preprocessing   -------------------------
 
 preprocess = transforms.Compose([
+    transforms.AutoAugment(),  # 必須是 uint8 所以就放在 ToTensor 前
+    # If the image is torch Tensor, it should be of type torch.uint8
     transforms.ToTensor(),
-    # transforms.Resize(256),
     # transforms.CenterCrop(224),
     transforms.Resize((375, 500)),
     transforms.RandomHorizontalFlip(p=0.5),
@@ -193,14 +194,14 @@ resnet152 = resnet152.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
 
-optimizer = optim.Adam(resnet152.parameters(), lr=LearningRate, weight_decay=1e-5)
+optimizer = optim.Adam(resnet152.parameters(), lr=LearningRate, weight_decay=0.01)
 # weight_decay: L2 regularization effect
 
 def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=25):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f'to device: {device}')
     history = []
-    lowest_valid_loss = 100
+    lowest_valid_loss = 100.0
  
     for epoch in range(epochs):
         print(f"Epoch: {epoch+1}/{epochs}")
