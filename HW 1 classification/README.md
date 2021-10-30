@@ -6,6 +6,9 @@ Install CUDA, cuDNN, PyTorch
 ```python=
 pip install numpy matplotlib tqdm scikit-learn
 pip install PyQt5  # (Optional) Ubuntu only
+sudo apt-get install libxcb-xinerama0  # (Optional) If
+    ERROR: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+    happend.
 ```
 
 ## Dataset
