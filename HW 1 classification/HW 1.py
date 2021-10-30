@@ -156,16 +156,31 @@ def GetModel(read_model_path=None):
         model = torch.load(read_model_path)
     else:
         model = models.resnet152(pretrained=True)
-        for param in model.parameters():
-            param.requires_grad = False
+
+        for name, child in model.named_children():
+            if name in ['layer4', 'avgpool', 'fc']:
+                print(f'{name} is unfrozen')
+                for param in child.parameters():
+                    param.requires_grad = True
+            else:
+                print(f'{name} is frozen')
+                for param in child.parameters():
+                    param.requires_grad = False
+
+        # for param in model.parameters():
+        #     param.requires_grad = True
 
         fc_inputs = model.fc.in_features
         model.fc = nn.Sequential(
-            nn.Linear(fc_inputs, 256),
-            nn.ReLU(),
-            nn.Dropout(0.4),
-            nn.Linear(256, 200),
+            nn.Dropout(0.5),
+            nn.Linear(fc_inputs, 200),
             nn.LogSoftmax(dim=1)
+
+            # nn.Linear(fc_inputs, 256),
+            # nn.ReLU(),
+            # nn.Dropout(0.4),
+            # nn.Linear(256, 200),
+            # nn.LogSoftmax(dim=1)
         )
     return model
 
