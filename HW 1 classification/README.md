@@ -5,6 +5,7 @@ Install CUDA, cuDNN, PyTorch
 
 ```python=
 pip install numpy matplotlib tqdm scikit-learn
+pip install PyQt5  # (Optional) Ubuntu only
 ```
 
 ## Dataset
