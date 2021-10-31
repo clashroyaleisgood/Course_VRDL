@@ -213,7 +213,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
         train_acc = 0.0
 
         # for input, label in tqdm(train_data):
-        how_many_batches = train_data_size / BatchSize
+        how_many_batches = np.ceil(train_data_size / BatchSize)
         for inputs, labels in tqdm(train_data, total=how_many_batches):
             # if i % 2 == 0:
             #     print(f'Train - Epoch: {epoch+1}/{epochs}, Batch: {i}/{how_many_batches}')
@@ -254,7 +254,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
         valid_loss = 0.0
         valid_acc = 0.0
 
-        how_many_batches = valid_data_size / BatchSize
+        how_many_batches = np.ceil(valid_data_size / BatchSize)
         for inputs, labels in tqdm(valid_data, total=how_many_batches):
             # if i % 2 == 0:
             #     print(f'Valid - Epoch: {epoch+1}/{epochs}, Batch: {i}/{how_many_batches}')
@@ -320,12 +320,14 @@ def DisplayResult(history):
     history = history.T
     train_L, train_A, valid_L, valid_A = history
 
+    fig = plt.figure()
     plt.plot(train_L, label='train_L')
     plt.plot(train_A, label='train_A')
     plt.plot(valid_L, label='valid_L')
     plt.plot(valid_A, label='valid_A')
     plt.title('Training')
     plt.legend()
+    fig.savefig('history.png')
     plt.show()
 
 DisplayResult(history)
