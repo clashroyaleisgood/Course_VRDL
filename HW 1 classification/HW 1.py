@@ -31,8 +31,6 @@ NumWorkers = 2
 
 LearningRate = 0.001
 
-ClassCount = 200
-
 # ------------------------- PreRequirement          -------------------------
 # Data Path
 TrainPath = r'HW 1 classification/2021VRDL_HW1_datasets/training_images/'
@@ -44,8 +42,8 @@ TrainLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/training_labels.txt
 AllLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/classes.txt'
 
 # Model Path
-ModelLoadPath = r'HW 1 classification/resnet152.pt'
-ModelSavePath = r'HW 1 classification/resnet152.pt'
+ModelLoadPath = r'HW 1 classification/resnet50.pt'
+ModelSavePath = r'HW 1 classification/resnet50.pt'
 
 # History Path
 HistorySavePath = r'HW 1 classification/history.npy'
@@ -159,7 +157,7 @@ def GetModel(read_model_path=None):
         print(f'Load Model from {read_model_path}')
         model = torch.load(read_model_path)
     else:
-        model = models.resnet152(pretrained=True)
+        model = models.resnet50(pretrained=True)
 
         for name, child in model.named_children():
             if name in ['layer4', 'avgpool', 'fc']:
@@ -188,13 +186,13 @@ def GetModel(read_model_path=None):
         )
     return model
 
-resnet152 = GetModel()
-# resnet152 = GetModel(ModelLoadPath)
-resnet152 = resnet152.to('cuda')
+resnet50 = GetModel()
+# resnet50 = GetModel(ModelLoadPath)
+resnet50 = resnet50.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
 
-optimizer = optim.Adam(resnet152.parameters(), lr=LearningRate, weight_decay=0.01)
+optimizer = optim.Adam(resnet50.parameters(), lr=LearningRate, weight_decay=0.01)
 # weight_decay: L2 regularization effect
 
 def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=25):
@@ -298,7 +296,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
     return model, history
 
 trained_model, history = TrainModel(
-    model=resnet152,
+    model=resnet50,
     train_data=train_data_loader,
     valid_data=valid_data_loader,
     loss_function=nn.NLLLoss(),
