@@ -191,11 +191,11 @@ resnet50 = GetModel()
 resnet50 = resnet50.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
-
 optimizer = optim.Adam(resnet50.parameters(), lr=LearningRate, weight_decay=0.01)
 # weight_decay: L2 regularization effect
+scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
 
-def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=25):
+def TrainModel(model, train_data, valid_data, loss_function, optimizer, scheduler, epochs=25):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f'to device: {device}')
     history = []
@@ -204,6 +204,9 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, epochs=2
     for epoch in range(epochs):
         print(f"Epoch: {epoch+1}/{epochs}")
  
+        if scheduler:
+            scheduler.step()
+
         model.train()
 
         # -------------------------------------------------------------------
@@ -301,6 +304,7 @@ trained_model, history = TrainModel(
     valid_data=valid_data_loader,
     loss_function=nn.NLLLoss(),
     optimizer=optimizer,
+    scheduler=scheduler,
     epochs=EpochCounts
 )
 
