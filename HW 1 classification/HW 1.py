@@ -331,7 +331,7 @@ def DisplayResult(history):
     plt.plot(valid_A, label='valid_A')
     plt.title('Training')
     plt.legend()
-    fig.savefig('history.png')
+    fig.savefig('HW 1 classification/history.jpg')
     plt.show()
 
 DisplayResult(history)
