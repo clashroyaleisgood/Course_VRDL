@@ -29,19 +29,19 @@ BatchSize = 128
 EpochCounts = 30
 NumWorkers = 4
 
-LearningRate = 0.0005
+LearningRate = 0.01
 WeightDecay = 0.05  # L2 loss
-OptimizerType = lambda params: optim.SGD(params, lr=LearningRate, weight_decay=WeightDecay)
-OptimizerString = f'SGD - lr: {LearningRate}, weight_decaty: {WeightDecay}'
+OptimizerType = lambda params: optim.SGD(params, lr=LearningRate, weight_decay=WeightDecay, momentum=0.9)
+OptimizerString = f'SGD - lr: {LearningRate}, weight_decaty: {WeightDecay}, momenton: 0.9'
 
-SchedulerType = lambda opter: optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 15, 25], gamma=0.2)
-SchedulerString = r"MultiStepLR - milestones=[5, 15, 25], gamme=0.2"
+SchedulerType = lambda opter: optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 10, 20], gamma=0.2)
+SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], gamme=0.2"
 # Gamma = 0.9  # for lr scheduler
 
 PaddingWidth = 100
-CropSize = (375, 500)
+CropSize = (375, 375)
 
-DropoutRate = 0.3  # Architecture: Dropout layer rate, end of model
+DropoutRate = 0.5  # Architecture: Dropout layer rate, end of model
 
 # ------------------------- PreRequirement          -------------------------
 # Data Path
@@ -102,6 +102,7 @@ preprocess = transforms.Compose([
     # transforms.AutoAugment(),  # 必須是 uint8 所以就放在 ToTensor 前
     # If the image is torch Tensor, it should be of type torch.uint8
     transforms.ToTensor(),
+    transforms.RandomRotation(10),
     transforms.Pad(PaddingWidth),
     transforms.CenterCrop(CropSize),
     # transforms.Resize((375, 500)),
@@ -345,8 +346,8 @@ def DisplayResult(history):
     plt.plot(valid_L, label='valid_L')
     plt.plot(valid_A, label='valid_A')
     # plt.title('Training')
-    plt.title(f'Batch Size: {BatchSize} Dropout Rate: {DropoutRate}\n' +
-              f'Optimizer: {OptimizerString}'+
+    plt.title(f'Bth Sz: {BatchSize} Drop: {DropoutRate}' +
+              f'Optimizer: {OptimizerString}\n'+
               f'Scheduler: {SchedulerString}')
     plt.legend()
     fig.savefig('HW 1 classification/history.jpg')
