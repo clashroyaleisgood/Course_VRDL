@@ -32,7 +32,7 @@ NumWorkers = 4
 LearningRate = 0.01
 WeightDecay = 0.05  # L2 loss
 OptimizerType = lambda params: optim.SGD(params, lr=LearningRate, weight_decay=WeightDecay, momentum=0.9)
-OptimizerString = f'SGD - lr: {LearningRate}, weight_decaty: {WeightDecay}, momenton: 0.9'
+OptimizerString = f'SGD - lr: {LearningRate}, WD: {WeightDecay}, momenton: 0.9'
 
 SchedulerType = lambda opter: optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 10, 20], gamma=0.2)
 SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], gamme=0.2"
@@ -341,6 +341,7 @@ def DisplayResult(history):
     train_L, train_A, valid_L, valid_A = history
 
     fig = plt.figure()
+    # plt.yscale('log')
     plt.plot(train_L, label='train_L')
     plt.plot(train_A, label='train_A')
     plt.plot(valid_L, label='valid_L')
@@ -348,6 +349,7 @@ def DisplayResult(history):
     # plt.title('Training')
     plt.title(f'Bth Sz: {BatchSize} Drop: {DropoutRate}' +
               f'Optimizer: {OptimizerString}\n'+
+              f'wide_resnet50_2 '+
               f'Scheduler: {SchedulerString}')
     plt.legend()
     fig.savefig('HW 1 classification/history.jpg')
