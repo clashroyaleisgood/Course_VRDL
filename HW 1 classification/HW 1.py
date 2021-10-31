@@ -29,9 +29,12 @@ BatchSize = 128
 EpochCounts = 30
 NumWorkers = 4
 
-LearningRate = 0.001
-WeightDecay = 0.02  # L2 loss
-Gamma = 0.8  # for lr scheduler
+LearningRate = 0.0005
+WeightDecay = 0.05  # L2 loss
+Gamma = 0.9  # for lr scheduler
+
+PaddingWidth = 100
+CropSize = (375, 500)
 
 DropoutRate = 0.3  # Architecture: Dropout layer rate, end of model
 
@@ -91,11 +94,12 @@ valid_data_size = len(X_valid)
 # ------------------------- Dataset Preprocessing   -------------------------
 
 preprocess = transforms.Compose([
-    transforms.AutoAugment(),  # 必須是 uint8 所以就放在 ToTensor 前
+    # transforms.AutoAugment(),  # 必須是 uint8 所以就放在 ToTensor 前
     # If the image is torch Tensor, it should be of type torch.uint8
     transforms.ToTensor(),
-    # transforms.CenterCrop(224),
-    transforms.Resize((375, 500)),
+    transforms.Pad(PaddingWidth),
+    transforms.CenterCrop(CropSize),
+    # transforms.Resize((375, 500)),
     transforms.RandomHorizontalFlip(p=0.5),
     # transforms.Normalize(mean=[0.485, 0.456, 0.406],
     #                      std=[0.229, 0.224, 0.225])
