@@ -25,7 +25,7 @@ RandomSeed = 99  # for train_test_split()
 
 # -----
 
-BatchSize = 128
+BatchSize = 64
 EpochCounts = 30
 NumWorkers = 4
 
@@ -54,8 +54,8 @@ TrainLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/training_labels.txt
 AllLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/classes.txt'
 
 # Model Path
-ModelLoadPath = r'HW 1 classification/resnet50.pt'
-ModelSavePath = r'HW 1 classification/resnet50.pt'
+ModelLoadPath = r'HW 1 classification/wide_resnet50_2.pt'
+ModelSavePath = r'HW 1 classification/wide_resnet50_2.pt'
 
 # History Path
 HistorySavePath = r'HW 1 classification/history.npy'
@@ -171,7 +171,7 @@ def GetModel(read_model_path=None):
         print(f'Load Model from {read_model_path}')
         model = torch.load(read_model_path)
     else:
-        model = models.resnet50(pretrained=True)
+        model = models.wide_resnet50_2(pretrained=True)
 
         for name, child in model.named_children():
             if name in ['layer4', 'avgpool', 'fc']:
@@ -200,13 +200,13 @@ def GetModel(read_model_path=None):
         )
     return model
 
-resnet50 = GetModel()
-# resnet50 = GetModel(ModelLoadPath)
-resnet50 = resnet50.to('cuda')
+wide_resnet50_2 = GetModel()
+# wide_resnet50_2 = GetModel(ModelLoadPath)
+wide_resnet50_2 = wide_resnet50_2.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
-# optimizer = optim.Adam(resnet50.parameters(), lr=LearningRate, weight_decay=WeightDecay)
-optimizer = OptimizerType(resnet50.parameters())
+# optimizer = optim.Adam(wide_resnet50_2.parameters(), lr=LearningRate, weight_decay=WeightDecay)
+optimizer = OptimizerType(wide_resnet50_2.parameters())
 # weight_decay: L2 regularization effect
 scheduler = SchedulerType(optimizer)
 
@@ -315,7 +315,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
     return model, history
 
 trained_model, history = TrainModel(
-    model=resnet50,
+    model=wide_resnet50_2,
     train_data=train_data_loader,
     valid_data=valid_data_loader,
     loss_function=nn.NLLLoss(),
