@@ -39,7 +39,7 @@ SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], gamme=0.2"
 # Gamma = 0.9  # for lr scheduler
 
 PaddingWidth = 100
-CropSize = (375, 375)
+CropSize = (400, 400)
 
 DropoutRate = 0.5  # Architecture: Dropout layer rate, end of model
 
