@@ -25,15 +25,15 @@ RandomSeed = 99  # for train_test_split()
 
 # -----
 
-BatchSize = 64
-EpochCounts = 10
-NumWorkers = 2
+BatchSize = 128
+EpochCounts = 30
+NumWorkers = 4
 
 LearningRate = 0.001
 WeightDecay = 0.02  # L2 loss
 Gamma = 0.8  # for lr scheduler
 
-DropoutRate = 0.2  # Architecture: Dropout layer rate, end of model
+DropoutRate = 0.3  # Architecture: Dropout layer rate, end of model
 
 # ------------------------- PreRequirement          -------------------------
 # Data Path
