@@ -299,6 +299,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
 
         if scheduler:
             scheduler.step()
+            print(scheduler.get_last_lr()[0])
     
     return model, history
 
