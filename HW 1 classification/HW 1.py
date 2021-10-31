@@ -31,7 +31,9 @@ NumWorkers = 4
 
 LearningRate = 0.0005
 WeightDecay = 0.05  # L2 loss
-Gamma = 0.9  # for lr scheduler
+LrSchduler = lambda opter: optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 15, 25], gamma=0.2)
+SchedulerString = r"MultiStepLR - milestones=[5, 15, 25], gamme=0.2"
+# Gamma = 0.9  # for lr scheduler
 
 PaddingWidth = 100
 CropSize = (375, 500)
@@ -201,7 +203,7 @@ resnet50 = resnet50.to('cuda')
 # ------------------------- Train / Test Functions  -------------------------
 optimizer = optim.Adam(resnet50.parameters(), lr=LearningRate, weight_decay=WeightDecay)
 # weight_decay: L2 regularization effect
-scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=Gamma)
+scheduler = LrSchduler(optimizer)
 
 def TrainModel(model, train_data, valid_data, loss_function, optimizer, scheduler, epochs=25):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -339,7 +341,8 @@ def DisplayResult(history):
     plt.plot(valid_L, label='valid_L')
     plt.plot(valid_A, label='valid_A')
     # plt.title('Training')
-    plt.title(f'Bth: {BatchSize} LR: {LearningRate} WD: {WeightDecay} G: {Gamma} DR: {DropoutRate}')
+    plt.title(f'Bth: {BatchSize} LR: {LearningRate} WD: {WeightDecay} DR: {DropoutRate}\n' +
+              f'Scheduler: {SchedulerString}')
     plt.legend()
     fig.savefig('HW 1 classification/history.jpg')
     plt.show()
