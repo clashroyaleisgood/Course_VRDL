@@ -30,6 +30,10 @@ EpochCounts = 10
 NumWorkers = 2
 
 LearningRate = 0.001
+WeightDecay = 0.02  # L2 loss
+Gamma = 0.8  # for lr scheduler
+
+DropoutRate = 0.2  # Architecture: Dropout layer rate, end of model
 
 # ------------------------- PreRequirement          -------------------------
 # Data Path
@@ -174,7 +178,7 @@ def GetModel(read_model_path=None):
 
         fc_inputs = model.fc.in_features
         model.fc = nn.Sequential(
-            nn.Dropout(0.5),
+            nn.Dropout(DropoutRate),
             nn.Linear(fc_inputs, 200),
             nn.LogSoftmax(dim=1)
 
@@ -191,9 +195,9 @@ resnet50 = GetModel()
 resnet50 = resnet50.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
-optimizer = optim.Adam(resnet50.parameters(), lr=LearningRate, weight_decay=0.01)
+optimizer = optim.Adam(resnet50.parameters(), lr=LearningRate, weight_decay=WeightDecay)
 # weight_decay: L2 regularization effect
-scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
+scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=Gamma)
 
 def TrainModel(model, train_data, valid_data, loss_function, optimizer, scheduler, epochs=25):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -204,9 +208,6 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
     for epoch in range(epochs):
         print(f"Epoch: {epoch+1}/{epochs}")
  
-        if scheduler:
-            scheduler.step()
-
         model.train()
 
         # -------------------------------------------------------------------
@@ -295,6 +296,9 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
         if lowest_valid_loss > history[-1][2]:
             lowest_valid_loss = history[-1][2]
             torch.save(model, ModelSavePath)
+
+        if scheduler:
+            scheduler.step()
     
     return model, history
 
