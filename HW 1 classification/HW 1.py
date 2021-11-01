@@ -35,7 +35,7 @@ OptimizerType = lambda params: optim.SGD(params, lr=LearningRate, weight_decay=W
 OptimizerString = f'SGD - lr: {LearningRate}, WD: {WeightDecay}, momenton: 0.9'
 
 SchedulerType = lambda opter: optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 10, 20], gamma=0.2)
-SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], gamme=0.2"
+SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], γ=0.2"
 # Gamma = 0.9  # for lr scheduler
 
 PaddingWidth = 100
@@ -340,21 +340,29 @@ def DisplayResult(history):
     history = history.T
     train_L, train_A, valid_L, valid_A = history
 
-    fig = plt.figure()
+    fig, ax = plt.subplots()
+    twins = ax.twinx()
+    twins.set_ylim(0, 1)
+    ax.set_xlabel('epochs')
+    ax.set_ylabel('Loss')
+    twins.set_ylabel('Accuracy')
+
     # plt.yscale('log')
-    plt.plot(train_L, label='train_L')
-    plt.plot(train_A, label='train_A')
-    plt.plot(valid_L, label='valid_L')
-    plt.plot(valid_A, label='valid_A')
-    # plt.title('Training')
+    p1, = ax.plot(train_L, 'b', label='train_L')
+    p2, = twins.plot(train_A, 'c', label='train_A')
+    p3, = ax.plot(valid_L, 'g', label='valid_L')
+    p4, = twins.plot(valid_A, 'y', label='valid_A')
+
     plt.title(f'Bth Sz: {BatchSize} Drop: {DropoutRate}' +
               f'Optimizer: {OptimizerString}\n'+
               f'wide_resnet50_2 '+
               f'Scheduler: {SchedulerString}')
-    plt.legend()
+    # plt.legend()
+    ax.legend(handles=[p1, p2, p3, p4])
     fig.savefig('HW 1 classification/history.jpg')
     plt.show()
 
 DisplayResult(history)
 np.save(HistorySavePath, np.array(history))
+
 
