@@ -137,7 +137,7 @@ class MyDataset(Dataset):
 
         self.folderpath = folderpath
         self.transform = transform
-    
+
     def __getitem__(self, index):
         filename = self.filenames[index]
         img = Image.open(self.folderpath + filename)  # check dimension
@@ -145,7 +145,7 @@ class MyDataset(Dataset):
 
         if self.transform:
             img = self.transform(img)
-        
+
         return img, self.labels[index]
 
     def __len__(self):
@@ -215,10 +215,10 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
     print(f'to device: {device}')
     history = []
     lowest_valid_loss = 100.0
- 
+
     for epoch in range(epochs):
         print(f"Epoch: {epoch+1}/{epochs}")
- 
+
         model.train()
 
         # -------------------------------------------------------------------
@@ -234,7 +234,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
             #     print(f'Train - Epoch: {epoch+1}/{epochs}, Batch: {i}/{how_many_batches}')
             inputs = inputs.to(device)
             labels = labels.to(device)
- 
+
             # 因為這裡的梯度是累加的，所以每次記得清零
             optimizer.zero_grad()
 
@@ -249,15 +249,15 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
             loss = loss_function(outputs, labels)  # 數字即可，不用 one-hot
             loss.backward()
             optimizer.step()
- 
+
             train_loss += loss.item() * inputs.size(0)
-            
+
             # - Accuracy -
             ret, predictions = torch.max(outputs.data, 1)
             correct_counts = predictions.eq(labels.data.view_as(predictions))
- 
+
             acc = torch.mean(correct_counts.type(torch.FloatTensor))
- 
+
             train_acc += acc.item() * inputs.size(0)
 
         avg_train_loss = train_loss / train_data_size
@@ -275,7 +275,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
             #     print(f'Valid - Epoch: {epoch+1}/{epochs}, Batch: {i}/{how_many_batches}')
             inputs = inputs.to(device)
             labels = labels.to(device)
-            
+
             outputs = model(inputs)
             loss = loss_function(outputs, labels)
 
@@ -284,9 +284,9 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
             # - Accuracy -
             ret, predictions = torch.max(outputs.data, 1)
             correct_counts = predictions.eq(labels.data.view_as(predictions))
- 
+
             acc = torch.mean(correct_counts.type(torch.FloatTensor))
- 
+
             valid_acc += acc.item() * inputs.size(0)
 
         avg_valid_loss = valid_loss / valid_data_size
@@ -311,7 +311,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
         if scheduler:
             scheduler.step()
             print(scheduler.get_last_lr()[0])
-    
+
     return model, history
 
 trained_model, history = TrainModel(
