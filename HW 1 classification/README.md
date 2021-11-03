@@ -12,6 +12,7 @@ sudo apt-get install libxcb-xinerama0  # (Optional) If
 ```
 
 ## Dataset
+get data from this [competetion](https://competitions.codalab.org/competitions/35668?secret_key=09789b13-35ec-4928-ac0f-6c86631dda07)
 - Train Data  
   put Training data to `HW 1 classification/training_images/`
 - Test Data  
@@ -21,6 +22,7 @@ like
 ```
 HW 1 classification/
         ├─ HW 1.py
+        ├─ HW 1 Predict.py
         └─ submission_readme/
                 └─ ...
         └─ 2021VRDL_HW1_datasets/
