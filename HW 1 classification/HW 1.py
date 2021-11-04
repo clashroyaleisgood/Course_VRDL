@@ -25,18 +25,23 @@ RandomSeed = 99  # for train_test_split()
 
 # -----
 
-BatchSize = 64
+BatchSize = 16
 EpochCounts = 30
 NumWorkers = 4
 
 LearningRate = 0.01
-WeightDecay = 0.05  # L2 loss
-OptimizerType = lambda params: optim.SGD(params, lr=LearningRate, weight_decay=WeightDecay, momentum=0.9)
+WeightDecay = 0.001  # L2 loss
+OptimizerType = lambda params: \
+    optim.SGD(params, lr=LearningRate, weight_decay=WeightDecay, momentum=0.9)
 OptimizerString = f'SGD - lr: {LearningRate}, WD: {WeightDecay}, momenton: 0.9'
 
-SchedulerType = lambda opter: optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 10, 20], gamma=0.2)
-SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], γ=0.2"
-# Gamma = 0.9  # for lr scheduler
+# SchedulerType = lambda opter: \
+#     optim.lr_scheduler.MultiStepLR(opter, milestones=[5, 10, 20], gamma=0.2)
+# SchedulerString = r"MultiStepLR - milestones=[5, 10, 20], γ=0.2"
+# SchedulerType = lambda opter: optim.lr_scheduler.ReduceLROnPlateau(opter)
+# SchedulerString = r'ReduceLROnPlateau'
+SchedulerType = lambda opter: None
+SchedulerString = 'None'
 
 PaddingWidth = 100
 CropSize = (400, 400)
@@ -50,7 +55,8 @@ TestPath = r'HW 1 classification/2021VRDL_HW1_datasets/testing_images/'
 TrainFileName = os.listdir(TrainPath)  # ['1.jpg', '5.jpg', ...]
 TestFileName = os.listdir(TestPath)
 # TrainSize = len(TrainFileName)
-TrainLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/training_labels.txt'
+TrainLabelPath = \
+    r'HW 1 classification/2021VRDL_HW1_datasets/training_labels.txt'
 AllLabelPath = r'HW 1 classification/2021VRDL_HW1_datasets/classes.txt'
 
 # Model Path
@@ -298,10 +304,10 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
         history.append([avg_train_loss, avg_train_acc,
                         avg_valid_loss, avg_valid_acc])
 
-        print(f'Epoch: {epoch+1}, Loss: {avg_train_loss:.4f}, ' + \
+        print(f'Epoch: {epoch+1}, Loss: {avg_train_loss:.4f}, ' +
               f'Accuracy: {avg_train_acc*100:.2f}%', end='')
-        print(f' - Validation, Loss: {avg_valid_loss:.4f}, ' + \
-                 f'Accuracy: {avg_valid_acc*100:.2f}%')
+        print(f' - Validation, Loss: {avg_valid_loss:.4f}, ' +
+              f'Accuracy: {avg_valid_acc*100:.2f}%')
 
         # torch.save(model, ModelSavePath)
         if lowest_valid_loss > history[-1][2]:
@@ -326,7 +332,7 @@ trained_model, history = TrainModel(
 
 torch.save(trained_model, ModelSavePath)
 
-# ------------------------- Train / Test Functions  -------------------------
+# ------------------------- Display / Save history  -------------------------
 
 def DisplayResult(history):
     '''
@@ -354,8 +360,8 @@ def DisplayResult(history):
     p4, = twins.plot(valid_A, 'y', label='valid_A')
 
     plt.title(f'Bth Sz: {BatchSize} Drop: {DropoutRate}' +
-              f'Optimizer: {OptimizerString}\n'+
-              f'wide_resnet50_2 '+
+              f'Optimizer: {OptimizerString}\n' +
+              f'wide_resnet50_2 ' +
               f'Scheduler: {SchedulerString}')
     # plt.legend()
     ax.legend(handles=[p1, p2, p3, p4])
@@ -364,5 +370,3 @@ def DisplayResult(history):
 
 DisplayResult(history)
 np.save(HistorySavePath, np.array(history))
-
-
