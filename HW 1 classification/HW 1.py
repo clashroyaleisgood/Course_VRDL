@@ -12,7 +12,6 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 
 from torch import nn, optim
-# from torch import optim
 from torchvision import models
 
 
@@ -105,16 +104,11 @@ valid_data_size = len(X_valid)
 # ------------------------- Dataset Preprocessing   -------------------------
 
 preprocess = transforms.Compose([
-    # transforms.AutoAugment(),  # 必須是 uint8 所以就放在 ToTensor 前
-    # If the image is torch Tensor, it should be of type torch.uint8
     transforms.ToTensor(),
     transforms.RandomRotation(10),
     transforms.Pad(PaddingWidth),
     transforms.CenterCrop(CropSize),
-    # transforms.Resize((375, 500)),
     transforms.RandomHorizontalFlip(p=0.5),
-    # transforms.Normalize(mean=[0.485, 0.456, 0.406],
-    #                      std=[0.229, 0.224, 0.225])
 ])
 def TestPreprocessing(img_path, preprocess):
     '''
@@ -189,20 +183,11 @@ def GetModel(read_model_path=None):
                 for param in child.parameters():
                     param.requires_grad = False
 
-        # for param in model.parameters():
-        #     param.requires_grad = True
-
         fc_inputs = model.fc.in_features
         model.fc = nn.Sequential(
             nn.Dropout(DropoutRate),
             nn.Linear(fc_inputs, 200),
             nn.LogSoftmax(dim=1)
-
-            # nn.Linear(fc_inputs, 256),
-            # nn.ReLU(),
-            # nn.Dropout(0.4),
-            # nn.Linear(256, 200),
-            # nn.LogSoftmax(dim=1)
         )
     return model
 
@@ -214,7 +199,6 @@ wide_resnet50_2 = wide_resnet50_2.to('cuda')
 # optimizer = optim.Adam(
 #     wide_resnet50_2.parameters(), lr=LearningRate, weight_decay=WeightDecay)
 optimizer = OptimizerType(wide_resnet50_2.parameters())
-# weight_decay: L2 regularization effect
 scheduler = SchedulerType(optimizer)
 
 def TrainModel(model, train_data, valid_data,

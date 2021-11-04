@@ -9,7 +9,6 @@ from torch import nn, optim
 from torch.utils.data import Dataset, DataLoader
 from torchvision import models, transforms
 
-
 # ------------------------- Hyper Params            -------------------------
 
 # Check Hyper parameters form "HW 1.py"
@@ -56,20 +55,14 @@ test_data_size = len(Order)
 # ------------------------- Dataset Preprocessing   -------------------------
 
 preprocess = transforms.Compose([
-    # transforms.AutoAugment(),  # 必須是 uint8 所以就放在 ToTensor 前
-    # If the image is torch Tensor, it should be of type torch.uint8
     transforms.ToTensor(),
     transforms.RandomRotation(10),
     transforms.Pad(PaddingWidth),
     transforms.CenterCrop(CropSize),
-    # transforms.Resize((375, 500)),
     transforms.RandomHorizontalFlip(p=0.5),
-    # transforms.Normalize(mean=[0.485, 0.456, 0.406],
-    #                      std=[0.229, 0.224, 0.225])
 ])
 
 # ------------------------- Dataset / DataLoader    -------------------------
-
 
 class MyDataset(Dataset):
     def __init__(self, filenames, folderpath, transform):
@@ -90,7 +83,6 @@ class MyDataset(Dataset):
     def __len__(self):
         return len(self.filenames)
 
-
 test_dataset = MyDataset(Order, TestPath, preprocess)
 test_data_loader = DataLoader(dataset=test_dataset,
                               batch_size=BatchSize,
@@ -98,7 +90,6 @@ test_data_loader = DataLoader(dataset=test_dataset,
                               num_workers=NumWorkers)
 
 # ------------------------- Choose Model            -------------------------
-
 
 def GetModel(read_model_path=None):
     model = None
@@ -110,12 +101,10 @@ def GetModel(read_model_path=None):
 
     return model
 
-
 predict_model = GetModel(ModelLoadPath)
 predict_model = predict_model.to('cuda')
 
 # ------------------------- Predict                 -------------------------
-
 
 def ModelPredict(model, test_data):
     '''
@@ -138,13 +127,11 @@ def ModelPredict(model, test_data):
     predict_results = np.concatenate(predict_results)
     return np.array(predict_results).flatten()
 
-
 predict_order = ModelPredict(
     model=predict_model,
     test_data=test_data_loader
 )
 predict_results = Labels[predict_order]
-
 
 submission = []
 for i in range(test_data_size):
