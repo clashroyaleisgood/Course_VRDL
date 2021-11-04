@@ -211,12 +211,14 @@ wide_resnet50_2 = GetModel()
 wide_resnet50_2 = wide_resnet50_2.to('cuda')
 
 # ------------------------- Train / Test Functions  -------------------------
-# optimizer = optim.Adam(wide_resnet50_2.parameters(), lr=LearningRate, weight_decay=WeightDecay)
+# optimizer = optim.Adam(
+#     wide_resnet50_2.parameters(), lr=LearningRate, weight_decay=WeightDecay)
 optimizer = OptimizerType(wide_resnet50_2.parameters())
 # weight_decay: L2 regularization effect
 scheduler = SchedulerType(optimizer)
 
-def TrainModel(model, train_data, valid_data, loss_function, optimizer, scheduler, epochs=25):
+def TrainModel(model, train_data, valid_data,
+               loss_function, optimizer, scheduler, epochs=25):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f'to device: {device}')
     history = []
@@ -236,8 +238,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
         # for input, label in tqdm(train_data):
         how_many_batches = np.ceil(train_data_size / BatchSize)
         for inputs, labels in tqdm(train_data, total=how_many_batches):
-            # if i % 2 == 0:
-            #     print(f'Train - Epoch: {epoch+1}/{epochs}, Batch: {i}/{how_many_batches}')
+
             inputs = inputs.to(device)
             labels = labels.to(device)
 
@@ -245,12 +246,6 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
             optimizer.zero_grad()
 
             outputs = model(inputs)
-            # outputs = torch.argmax(outputs, 1) # one hot to normal encoding
-            # outputs = outputs.view([-1, 1])
-            # outputs = outputs.to(torch.int64)
-
-            # labels = labels.to(torch.int64)
-            # labels = labels.squeeze()
 
             loss = loss_function(outputs, labels)  # 數字即可，不用 one-hot
             loss.backward()
@@ -277,8 +272,7 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
 
         how_many_batches = np.ceil(valid_data_size / BatchSize)
         for inputs, labels in tqdm(valid_data, total=how_many_batches):
-            # if i % 2 == 0:
-            #     print(f'Valid - Epoch: {epoch+1}/{epochs}, Batch: {i}/{how_many_batches}')
+
             inputs = inputs.to(device)
             labels = labels.to(device)
 
@@ -300,7 +294,6 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
 
         # -------------------------------------------------------------------
 
-        # history.append([avg_train_loss, avg_train_acc])
         history.append([avg_train_loss, avg_train_acc,
                         avg_valid_loss, avg_valid_acc])
 
@@ -309,7 +302,6 @@ def TrainModel(model, train_data, valid_data, loss_function, optimizer, schedule
         print(f' - Validation, Loss: {avg_valid_loss:.4f}, ' +
               f'Accuracy: {avg_valid_acc*100:.2f}%')
 
-        # torch.save(model, ModelSavePath)
         if lowest_valid_loss > history[-1][2]:
             lowest_valid_loss = history[-1][2]
             torch.save(model, ModelSavePath)
