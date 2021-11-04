@@ -125,3 +125,5 @@ Detailed in section [Deal with overfitting](#deal-with-overfitting)
 Most spetially, I try my best to keep the training structure clean and easy to modify.  Split each region using comment dash lines and move all hyperparameters to top of the code such that I could do my experiment/training eazily.
 
 Though final result is not that prefect, but I think I find a way to keep my training code clean which will helps me from messing up the train with horrible code. And this must be helpful to other challenges later.
+
+<!-- Export to pdf with Typora -->
