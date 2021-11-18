@@ -3,3 +3,6 @@
 
 ## Homework1 - Classification
 [Classification](https://github.com/clashroyaleisgood/Course_VRDL/tree/main/HW%201%20classification)
+
+## Homework2 - Object Detection
+[Object Detection](https://github.com/clashroyaleisgood/Course_VRDL/tree/main/HW2_Object_Detection)
