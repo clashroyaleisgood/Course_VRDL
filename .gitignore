@@ -138,8 +138,7 @@ dmypy.json
 # !HW 1 classification/2021VRDL_HW1_datasets/classes.txt
 # !HW 1 classification/2021VRDL_HW1_datasets/testing_img_order
 # !HW 1 classification/2021VRDL_HW1_datasets/training_labels
-HW2_Object_Detection/HW2_dataset/test_images/
-HW2_Object_Detection/HW2_dataset/train_images/
+HW2_Object_Detection/HW2_dataset/
 
 
 *.zip
