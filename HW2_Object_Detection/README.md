@@ -2,16 +2,25 @@
 
 - [Homework2 - Object Detection](#homework2---object-detection)
   - [Environment](#environment)
-  - [Code](#code)
   - [Dataset](#dataset)
+  - [Code](#code)
   - [Model](#model)
   - [Train or Test](#train-or-test)
 
 ## Environment
+Install CUDA, cuDNN, PyTorch  
+modules:
+```python=
+pip install numpy h5py
+pip install pandas requests tensorboard seaborn PyYAML
 
-## Code
+```
 
 ## Dataset
+
+
+with help of [this site](https://www.vitaarca.net/post/tech/access_svhn_data_in_python/)
+## Code
 
 ## Model
 
