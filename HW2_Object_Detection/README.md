@@ -11,7 +11,7 @@
 Install CUDA, cuDNN, PyTorch  
 modules:
 ```python=
-pip install numpy h5py
+pip install numpy h5py opencv-python
 pip install pandas requests tensorboard seaborn PyYAML
 
 ```
