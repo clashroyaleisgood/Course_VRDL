@@ -33,9 +33,9 @@ Download whole code with the following command:
 ## Dataset
 Get data from this [competetion](https://competitions.codalab.org/competitions/35668?secret_key=09789b13-35ec-4928-ac0f-6c86631dda07)
 - Train Data  
-  Put Training data to `HW 1 classification/training_images/`
+  Put Training data to `HW 1 classification/2021VRDL_HW1_datasets/training_images/`
 - Test Data  
-  Put Testing data to `HW 1 classification/testing_images/`
+  Put Testing data to `HW 1 classification/2021VRDL_HW1_datasets/testing_images/`
 
 ## Model
 Get model and weight with this [link](https://drive.google.com/file/d/1rvYFyPD9iu1JcOeVKefbxNeNqWy5FGSu/view?usp=sharing)  
