@@ -39,19 +39,19 @@ Get data from this [competetion](https://competitions.codalab.org/competitions/3
 , [Dataset Link](https://drive.google.com/drive/folders/1aRWnNvirWHXXXpPPfcWlHQuzGJdXagoc?usp=sharing)
 
 - Train Data  
-  Put Training data to `HW2_Object_Detection/HW2_dataset/training_images/`
+  Put Training data to `HW2_Object_Detection/HW2_dataset/train_images/`
   
 - Test Data  
-  Put Testing data to `HW2_Object_Detection/HW2_dataset/testing_images/`
+  Put Testing data to `HW2_Object_Detection/HW2_dataset/test_images/`
 
 ### Preprocessing(Optional)
 If you just want to use this model to detect the numbers, not need to train the model yourself, you can skip this step.
 
-split training data and validation data from `training_images/` by 4 train : 1 valid
+split training data and validation data from `train_images/` by 4 train : 1 valid
 
 `~/Course_VRDL$ python HW2_Object_Detection/parse_label.py`
-> get original labels from `training_images/digitStruct.mat`  
-> get original pictures from `training_images/`  
+> get original labels from `train_images/digitStruct.mat`  
+> get original pictures from `train_images/`  
 > generate labels and move pictures like...  
 > `Course_VRDL/images/garbage/imgs.pngs` are pictures that bounding box getting out of range of the image
 ```
@@ -98,8 +98,8 @@ director/
         │   │   └── 2.txt...
         │   └── valid/
         │
-        ├── testing_images/
-        └── training_images/
+        ├── test_images/
+        └── train_images/
 ```
 
 ## Train or Test
