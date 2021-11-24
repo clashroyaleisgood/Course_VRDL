@@ -1,0 +1,15 @@
+# pip install -r requirements.txt
+
+# Base ----------------------------------------
+numpy
+h5py
+opencv-python
+requests
+PyYAML
+
+# Logging -------------------------------------
+tensorboard
+
+# Plotting ------------------------------------
+pandas
+seaborn
