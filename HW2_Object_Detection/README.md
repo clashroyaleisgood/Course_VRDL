@@ -114,19 +114,19 @@ director/
                 --save-conf
 ```
 detect result will be stored in `yolov5/runs/detect/exp?/labels`
-> Notice that `exp?` depend on how many times you do the detection(exp -> exp2 -> exp3...)  
+> **Notice that** `exp?` depend on how many times you do the detection(exp -> exp2 -> exp3...)  
 > after detection, yolov5 will tell you which `exp?` is the result saved to
 
 2. Result Parsing: Parse result from yolov5 output format to COCO dataset format(in json)
 
-change the line 6 of parse_predict_result.py, the exp? is depend on the previous step.
+change the line 6 of parse_predict_result.py, the exp? is depend on the previous step.  
 `ResultPath = r'../yolov5/runs/detect/exp?/labels'`
 
-atfer correcting the exp?, you can exectute the following command to get the result
+atfer correcting the exp?, you can exectute the following command to get the result  
 `~/Course_VRDL$ python HW2_Object_Detection/parse_predict_result.py`
 
-the result is sotored in `HW2_Object_Detection/answer.json`
-you can also change to which director you want in line 8 of `parse_predict_result.py`
+the result is sotored in `HW2_Object_Detection/answer.json`  
+you can also change to which director you want in line 8 of `parse_predict_result.py`  
 `DumpJsonPath = r'HW2_Object_Detection/answer.json'`
 
 ### Training
@@ -145,7 +145,7 @@ you can also change to which director you want in line 8 of `parse_predict_resul
 ```
 > the result will be stored in `yolov5/runs/train/exp?/`  
 > the weights we use is stored in `yolov5/runs/train/exp?/weights/best.pt`  
-> Notice that `exp?` depend on how many times you do the training(exp -> exp2 -> exp3...)  
+> **Notice that** `exp?` depend on how many times you do the training(exp -> exp2 -> exp3...)  
 > after training, yolov5 will tell you which `exp?` is the result saved to
 3. Inference: go to yolov5 folder and execute  
 ```
