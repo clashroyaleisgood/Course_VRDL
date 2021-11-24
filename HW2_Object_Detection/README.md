@@ -119,8 +119,8 @@ detect result will be stored in `yolov5/runs/detect/exp?/labels`
 
 2. Result Parsing: Parse result from yolov5 output format to COCO dataset format(in json)
 
-change the line 6 of parse_predict_result.py, the exp? is depend on the previous step.  
-`ResultPath = r'../yolov5/runs/detect/exp?/labels'`
+change the line 6 of parse_predict_result.py, the exp is depend on the previous step.  
+`ResultPath = r'../yolov5/runs/detect/exp/labels'`
 
 atfer correcting the exp?, you can exectute the following command to get the result  
 `~/Course_VRDL$ python HW2_Object_Detection/parse_predict_result.py`

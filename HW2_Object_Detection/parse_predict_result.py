@@ -3,7 +3,7 @@ from PIL import Image
 import json
 from tqdm import tqdm
 
-ResultPath = r'../yolov5/runs/detect/exp?/labels'
+ResultPath = r'../yolov5/runs/detect/exp/labels'
 TestImageFolderPath = r'HW2_Object_Detection/HW2_dataset/test_images'
 DumpJsonPath = r'HW2_Object_Detection/answer.json'
 
