@@ -3,8 +3,8 @@ from PIL import Image
 import json
 from tqdm import tqdm
 
+ResultPath = r'../yolov5/runs/detect/exp?/labels'
 TestImageFolderPath = r'HW2_Object_Detection/HW2_dataset/test_images'
-ResultPath = r'/home/oscar/Desktop/yolov5/runs/detect/exp4/labels'
 DumpJsonPath = r'HW2_Object_Detection/answer.json'
 
 def Parser(result_labels_folder, img_folder, dump_path):
