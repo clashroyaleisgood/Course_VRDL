@@ -125,6 +125,7 @@ director/
                 --weights ../Course_VRDL/HW2_Object_Detection/MODEL.pt \
                 --source ../Course_VRDL/HW2_Object_Detection/HW2_dataset/test_images \
                 --img 320 \
+                --conf-thres 0.01 \
                 --save-txt \
                 --save-conf
 ```
@@ -168,6 +169,7 @@ you can also change to which director you want in line 8 of `parse_predict_resul
             --weights runs/train/{exp?}/weights/best.pt \
             --source ../Course_VRDL/HW2_Object_Detection/HW2_dataset/test_images \
             --img 320 \
+            --conf-thres 0.01 \
             --save-txt \
             --save-conf
 ```
