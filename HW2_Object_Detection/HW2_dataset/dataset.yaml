@@ -1,0 +1,9 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: ../Course_VRDL/HW2_Object_Detection/HW2_dataset/  # dataset root dir
+train: images/train  # train images (relative to 'path') 128 images
+val: images/train  # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+# Classes
+nc: 10  # number of classes
+names: [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ]  # class names
