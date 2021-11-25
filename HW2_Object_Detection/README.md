@@ -4,14 +4,14 @@ You can see report [here](report/report.md) in markdown format, or [pdf](report/
 
 Competetion: https://competitions.codalab.org/competitions/35668
 
-Result mAP:0.5:0.95 on testing dataset: 0.72272  
-Result inference speed on testing dataset: 0.0948  
-[Detailed](#result)
+Result mAP:0.5:0.95 on testing dataset: 0.41520  
+Result inference speed on testing dataset: 0.0948s per image  
+[Details](#result)
 
 with help of [yolov5 model](https://github.com/ultralytics/yolov5)
 
-[Colab inference code](https://drive.google.com/file/d/1RQaeVJLyXpskW6_QK5nggbJp1K8tGBL5/view?usp=sharing)  
-[Model.pt]() TODO
+Colab inference: [code](https://drive.google.com/file/d/1RQaeVJLyXpskW6_QK5nggbJp1K8tGBL5/view?usp=sharing)  
+Model weight: [Model.pt](https://drive.google.com/file/d/1mqJ-FLRz-bnXSM4SvPR_blfZuwDD-qPA/view?usp=sharing)
 
 ## Table of Contents
 - [Homework2 - Object Detection](#homework2---object-detection)
@@ -33,6 +33,10 @@ modules:
 ```python=
 pip install numpy h5py opencv-python
 pip install pandas requests tensorboard seaborn PyYAML
+```
+or simply
+```
+pip install -r Course_VRDL/HW2_Object_Detection/requirements.txt
 ```
 ## Code
 Download code with the following command:  
@@ -88,7 +92,7 @@ Course_VRDL/
 with help of [this site](https://www.vitaarca.net/post/tech/access_svhn_data_in_python/)
 
 ## Model
-Get model and weight with this [link]() TODO  
+Get model and weight with this [link](https://drive.google.com/file/d/1mqJ-FLRz-bnXSM4SvPR_blfZuwDD-qPA/view?usp=sharing)  
 Put model file to `Course_VRDL/HW2_Object_Detection/MODEL.pt`
 
 ## Architecture
@@ -152,10 +156,9 @@ you can also change to which director you want in line 8 of `parse_predict_resul
 ~/yolov5$ python train.py \
             --img 320 \
             --batch 64 \
-            --epochs 400 \
+            --epochs 100 \
             --data ../Course_VRDL/HW2_Object_Detection/HW2_dataset/dataset.yaml \
-            --weights yolov5m.pt \
-            --freeze 5
+            --weights yolov5m.pt
 
 # if you don't have enough memory, just reduce the batchsize
 ```
@@ -176,8 +179,8 @@ you can also change to which director you want in line 8 of `parse_predict_resul
 The next step is the same as [Testing](#testing) region
 
 ## Result
-mAP:0.5:0.95 on testing dataset: 0.72272  
-![]()
+mAP:0.5:0.95 on testing dataset: 0.41520  
+![](mAP_score.png)
 
 inference speed on testing dataset: 0.0948
 ![](report/inference_speed.png)  
