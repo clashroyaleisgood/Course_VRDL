@@ -4,8 +4,8 @@ You can see report [here](report/report.md) in markdown format, or [pdf](report/
 
 Competetion: https://competitions.codalab.org/competitions/35668
 
-Result mAP:0.5:0.95 on testing dataset: 0.41520  
-Result inference speed on testing dataset: 0.0948s per image  
+Result mAP:0.5:0.95 on testing dataset: **0.41520**  
+Result inference speed on testing dataset: **0.0948s** per image  
 [Details](#result)
 
 with help of [yolov5 model](https://github.com/ultralytics/yolov5)
@@ -179,8 +179,8 @@ you can also change to which director you want in line 8 of `parse_predict_resul
 The next step is the same as [Testing](#testing) region
 
 ## Result
-mAP:0.5:0.95 on testing dataset: 0.41520  
-![](mAP_score.png)
+mAP:0.5:0.95 on testing dataset: **0.41520 ** 
+![](report/mAP_score.png)
 
-inference speed on testing dataset: 0.0948
+inference speed on testing dataset: **0.0948**
 ![](report/inference_speed.png)  
