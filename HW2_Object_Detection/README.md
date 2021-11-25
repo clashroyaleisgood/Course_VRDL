@@ -1,6 +1,21 @@
 # Homework2 - Object Detection
 
+You can see report [here](report/report.md) in markdown format, or [pdf](report/VRDL_HW2_309553018_Report.pdf) format which is exported by [Typora](https://typora.io/).
+
+Competetion: https://competitions.codalab.org/competitions/35668
+
+Result mAP:0.5:0.95 on testing dataset: 0.72272  
+Result inference speed on testing dataset: 0.0948  
+[Detailed](#result)
+
+with help of [yolov5 model](https://github.com/ultralytics/yolov5)
+
+[Colab inference code](https://drive.google.com/file/d/1RQaeVJLyXpskW6_QK5nggbJp1K8tGBL5/view?usp=sharing)  
+[Model.pt]() TODO
+
+## Table of Contents
 - [Homework2 - Object Detection](#homework2---object-detection)
+  - [Table of Contents](#table-of-contents)
   - [Environment](#environment)
   - [Code](#code)
   - [Dataset](#dataset)
@@ -10,6 +25,7 @@
   - [Train or Test](#train-or-test)
     - [Testing](#testing)
     - [Training](#training)
+  - [Result](#result)
 
 ## Environment
 Install CUDA, cuDNN, PyTorch  
@@ -17,7 +33,6 @@ modules:
 ```python=
 pip install numpy h5py opencv-python
 pip install pandas requests tensorboard seaborn PyYAML
-
 ```
 ## Code
 Download code with the following command:  
@@ -157,3 +172,10 @@ you can also change to which director you want in line 8 of `parse_predict_resul
             --save-conf
 ```
 The next step is the same as [Testing](#testing) region
+
+## Result
+mAP:0.5:0.95 on testing dataset: 0.72272  
+![]()
+
+inference speed on testing dataset: 0.0948
+![](report/inference_speed.png)  
