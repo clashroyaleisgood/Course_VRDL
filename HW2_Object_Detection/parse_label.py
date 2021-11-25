@@ -33,7 +33,7 @@ def get_img_boxes(f, idx=0):
     :param idx: index of the image
     :return: dictionary
     """
-    meta = { key : [] for key in bbox_prop}
+    meta = {key: [] for key in bbox_prop}
 
     box = f[bboxs[idx][0]]
     for key in box.keys():
@@ -53,12 +53,12 @@ def change_format(meta, size):
                             [class, x_center, y_center, width, height] ]
     :param meta: output of get_img_boxes()
     :param size: (width, height) of picture
-    
+
     :return: list of [class, x_center, y_center, width, height]
 
     """
     bbox_numbers = len(meta['label'])
-    rows=[]
+    rows = []
     for i in range(bbox_numbers):
         class_ = meta['label'][i]
         x_center = (meta['left'][i] + meta['width'][i] / 2) / size[0]
@@ -80,7 +80,7 @@ def change_format(meta, size):
             return False
 
         rows.append([class_, x_center, y_center, width, height])
-    
+
     return rows
 
 # -----------------------------------------------------------------------------
@@ -122,12 +122,14 @@ for i in tqdm(range(0, train_size)):
     pic_meta = get_img_boxes(f, i)
     row_data = change_format(pic_meta, picture.size)
     if row_data is False:
-        os.rename(f'{PicturePath}/{pic_name}', f'{GarbageImagePath}/{pic_name}')
+        os.rename(f'{PicturePath}/{pic_name}',
+                  f'{GarbageImagePath}/{pic_name}')
         continue
 
     # 1. move picture  2. write lable.txt
     os.rename(f'{PicturePath}/{pic_name}', f'{TrainImagePath}/{pic_name}')
-    with open(f'{TrainLabelPath}/{pic_name.split(".")[0]}.txt', 'w') as label_file:
+    with open(f'{TrainLabelPath}/{pic_name.split(".")[0]}.txt', 'w') \
+            as label_file:
         for row in row_data:
             # label_file.write(''.join(str(e) for e in row) + '\n')
             print(*row, sep=' ', end='\n', file=label_file)
@@ -143,13 +145,14 @@ for i in tqdm(range(train_size, image_size)):
     pic_meta = get_img_boxes(f, i)
     row_data = change_format(pic_meta, picture.size)
     if row_data is False:
-        os.rename(f'{PicturePath}/{pic_name}', f'{GarbageImagePath}/{pic_name}')
+        os.rename(f'{PicturePath}/{pic_name}',
+                  f'{GarbageImagePath}/{pic_name}')
         continue
 
     # 1. move picture  2. write lable.txt
     os.rename(f'{PicturePath}/{pic_name}', f'{ValidImagePath}/{pic_name}')
-    with open(f'{ValidLabelPath}/{pic_name.split(".")[0]}.txt', 'w') as label_file:
+    with open(f'{ValidLabelPath}/{pic_name.split(".")[0]}.txt', 'w') \
+            as label_file:
         for row in row_data:
             # label_file.write(''.join(str(e) for e in row) + '\n')
             print(*row, sep=' ', end='\n', file=label_file)
-

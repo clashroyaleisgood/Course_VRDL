@@ -20,7 +20,7 @@ def Parser(result_labels_folder, img_folder, dump_path):
             for line in file:
                 d = change_format(line, size, txt_file.split('.')[0])
                 dict_collector += [d]
-    
+
     with open(dump_path, 'w') as file:
         json.dump(dict_collector, file, indent=4)
 
@@ -62,7 +62,7 @@ def change_format(row_data: str, size: (int, int), image_id: str) -> dict:
 
     output_dict = dict()
     output_dict['image_id'] = int(image_id)
-    output_dict['bbox'] = [ left, top, width, height ]
+    output_dict['bbox'] = [left, top, width, height]
     output_dict['score'] = confidence
     output_dict['category_id'] = class_
 
