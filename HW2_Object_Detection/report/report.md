@@ -29,11 +29,11 @@ Some of the pictures are so small and even hard to detect by human.
 So I use `--img 320` to enlarge the small images. It helps model to find patterns eazily.
 
 ### Result
-mAP:0.5:0.95: **0.41520  **
+mAP:0.5:0.95: **0.41520**  
 ![](mAP_score.png)
 
 speed: **0.0948s** each image  
-<img src="inference_speed.png" width="400"> 
+<img src="inference_speed.png" width="800"> 
 
 <div style="page-break-after: always;"></div>
 
@@ -78,8 +78,8 @@ validation_percentage: 1/5
 
 ## Experiments
 Firstly I use `--freeze` flag to reduce the learning time and keep the well pretrained previous layers, But result are not good.
-Until I gradually reduce the freeze layer number to **0**, the results are getting better and better.
-I discovered that, It may take time to train the whole model rather than train the last few layers, but the result will be better because we can train the model to the detail part(first few layers).
+Until I gradually reduce the freeze layer number to **0**, the results are getting better and better.  
+I discovered that, It may take time to train the whole model rather than train the last few layers, but the result will be better because we can train the model to the detail part(first few layers).  
 The pretrained one is good enough, but it's not fit to this task, so we still need to modify the first few layers to get more details about our task.
 ___
 
@@ -87,9 +87,9 @@ Then I got struggle with the overfitting problem I guess.
 I have very strange result in my training, both train/valid loss reduce in the begining, then getting smooth.  
 But suddenly reduce again after aound half of the epochs.
 The reduction is getting more and more, and sharply droped at the very end like this:
-<img src="train/results_free5_200.png" width="600">  
+<img src="train/results_free5_200.png" width="800">  
 same situation happened when I enlarge the epochs to 400  
-<img src="train/results_free5_400.png" width="600">  
+<img src="train/results_free5_400.png" width="800">  
 So it's not because of the not yet converge of the model
 
 I have very high mAP in train and valid due to this, but even lower mAP in testing data.
@@ -115,14 +115,14 @@ It's not a good way but still a effective way using manually earlly stop.
 ## About inference fairness
 Because I use yolov5 model, the structure is so complicated that I can't turn command-line detection into python code detection. So, I can only use command-line detection like `python detect.py --weights weight.pt --source folder/to/images`.  
 I have also try to combine python for loop with command-line detection like...
-<img src="inference_fairness/forloop_detection.png" width="600">  
+<img src="inference_fairness/forloop_detection.png" width="800">  
 But there is another unfairness happened, I have to load model and weights times and times, and getting really bad speed performance.  
 
 After trying this, I try to read the original `yolov5/detect.py` to see how it work inside, and I found that:  
-<img src="inference_fairness/take_path.png" width="400">  
+<img src="inference_fairness/take_path.png" width="600">  
 detector take a path once from `dataset`(LoadImage class)
 
-<img src="inference_fairness/LoadImage.png" width="400">  
+<img src="inference_fairness/LoadImage.png" width="600">  
 
 LoadImage class is also load a image(`cv2.imread(path)`) once the __next__(self) is called by for loop
 
