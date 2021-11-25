@@ -65,8 +65,6 @@ And pick the labels(and corresponding image) with problems out of training image
 I use powerful object detection model: [yolov5](https://github.com/ultralytics/yolov5) and its pretrained weights.
 (The model version I use is yolov5m, where the "m" means the median, the others are s for small, l for large, and x for extra-large)
 
-<div style="page-break-after: always;"></div>
-
 ## Hyperparameters
 ```
 img_size: 320
