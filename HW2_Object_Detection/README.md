@@ -162,21 +162,26 @@ you can also change to which director you want in line 8 of `parse_predict_resul
 
 # if you don't have enough memory, just reduce the batchsize
 ```
-> the result will be stored in `yolov5/runs/train/exp?/`  
-> the weights we use is stored in `yolov5/runs/train/exp?/weights/best.pt`  
-> **Notice that** `exp?` depend on how many times you do the training(exp -> exp2 -> exp3...)  
-> after training, yolov5 will tell you which `exp?` is the result saved to
+> take the weights out earlier when epoch goes to **40**  
+> copy weights from `yolov5/runs/train/exp?/weights/best.pt`
+> save to `Course_VRDL/HW2_Object_Detection/MODEL.pt` or wherever you want(just remenber the director)
+
+> ~~the result will be stored in `yolov5/runs/train/exp?/`~~  
+> ~~the weights we use is stored in `yolov5/runs/train/exp?/weights/best.pt`~~  
+> ~~**Notice that** `exp?` depend on how many times you do the training(exp -> exp2 -> exp3...)~~  
+> ~~after training, yolov5 will tell you which `exp?` is the result saved to~~
+
 3. Inference: go to yolov5 folder and execute  
 ```
 ~/yolov5$ python detect.py \
-            --weights runs/train/{exp?}/weights/best.pt \
+            --weights path/to/your/MODEL.pt \
             --source ../Course_VRDL/HW2_Object_Detection/HW2_dataset/test_images \
             --img 320 \
             --conf-thres 0.01 \
             --save-txt \
             --save-conf
 ```
-The next step is the same as [Testing](#testing) region
+The following step is the same as [Testing](#testing) region
 
 ## Result
 mAP:0.5:0.95 on testing dataset: **0.41520 ** 
