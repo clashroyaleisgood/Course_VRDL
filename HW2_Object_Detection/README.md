@@ -184,7 +184,7 @@ you can also change to which director you want in line 8 of `parse_predict_resul
 The following step is the same as [Testing](#testing) region
 
 ## Result
-mAP:0.5:0.95 on testing dataset: **0.41520 ** 
+mAP:0.5:0.95 on testing dataset: **0.41520** 
 ![](report/mAP_score.png)
 
 inference speed on testing dataset: **0.0948**
