@@ -31,7 +31,7 @@ Model weight: [Model.pt](https://drive.google.com/file/d/1mqJ-FLRz-bnXSM4SvPR_bl
 Install CUDA, cuDNN, PyTorch  
 modules:
 ```python=
-pip install numpy h5py opencv-python
+pip install tqdm numpy h5py opencv-python
 pip install pandas requests tensorboard seaborn PyYAML
 ```
 or simply

@@ -1,6 +1,7 @@
 # pip install -r requirements.txt
 
 # Base ----------------------------------------
+tqdm
 numpy
 h5py
 opencv-python
