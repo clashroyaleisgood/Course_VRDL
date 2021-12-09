@@ -142,7 +142,9 @@ HW2_Object_Detection/HW2_dataset/
 !HW2_Object_Detection/HW2_dataset/dataset.yaml
 HW2_Object_Detection/test.py
 HW2_Object_Detection/answer.json
+
 HW3_Instance_Segmentation/test.py
+HW3_Instance_Segmentation/dataset/
 
 *.zip
 *.jpg
