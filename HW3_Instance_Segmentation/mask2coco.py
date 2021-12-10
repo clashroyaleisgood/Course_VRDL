@@ -24,7 +24,11 @@ categories = [{
 
 ImageFolders = os.listdir(DatasetPath)  # list of(['TCGA-18-5592-01Z-00-DX1'])
 
+<<<<<<< HEAD
 for img_id, img_name in enumerate(ImageFolders):
+=======
+for img_id, img_name in enumerate(ImageFolders[:2]):
+>>>>>>> f4bc22b6ba269fa17749e1551cbe86e5e202dc3e
     ImageFolder = os.path.join(DatasetPath, img_name)  # path to TCGA-18-5592-01Z-00-DX1/
     ImagePath = os.path.join(ImageFolder, 'images', img_name + '.png')
     MaskFolderPath = os.path.join(ImageFolder, 'masks')
