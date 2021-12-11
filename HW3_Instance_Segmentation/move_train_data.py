@@ -1,3 +1,4 @@
+import os
 '''
     move training images
         from dataset/train/*/images/*.png
@@ -10,18 +11,17 @@
       to dataset/my_dataset/JPEGImages/TCGA-18-5592-01Z-00-DX1.png
 
 '''
-import os
 
 ReadTrainImageFolder = r'HW3_Instance_Segmentation/dataset/train'
 
 SaveTrainDataFolder = r'HW3_Instance_Segmentation/dataset/my_dataset/train'
 
 def MoveTrainImages():
-    SaveTrainImageFolder = os.path.join(SaveTrainDataFolder, r'JPEGImages')
+    SaveTrainImageFolder = os.path.join(SaveTrainDataFolder, r'Images')
 
     PathToBuild = [
         'HW3_Instance_Segmentation/dataset/my_dataset',
-        'HW3_Instance_Segmentation/dataset/my_dataset/JPEGImages'
+        'HW3_Instance_Segmentation/dataset/my_dataset/Images'
     ]
     for path in PathToBuild:
         if not os.path.isdir(path):

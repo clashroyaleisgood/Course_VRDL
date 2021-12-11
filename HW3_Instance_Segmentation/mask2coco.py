@@ -37,7 +37,7 @@ for img_id, img_name in enumerate(ImageFolders):
         'id': img_id,
         'width': width,
         'height': height,
-        'file_name': os.path.join(Mode, img_name, 'images', img_name + '.png')
+        'file_name': os.path.join('Images', img_name + '.png')
     }
     images += [image_data]
     # Process masks
