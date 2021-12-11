@@ -66,7 +66,8 @@ for img_id, img_name in enumerate(ImageFolders):
     
 data = {
     'images': images,
-    'annotations': annotations
+    'annotations': annotations,
+    'categories': categories
 }
 
 with open(SaveJsonPath, 'w') as file:
