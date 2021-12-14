@@ -1,7 +1,11 @@
 import json
+import os
 from detectron2.data import MetadataCatalog, DatasetCatalog
-
 from detectron2.data.datasets import register_coco_instances
+from detectron2.engine import DefaultPredictor, DefaultTrainer
+from detectron2.config import get_cfg
+from detectron2 import model_zoo
+
 register_coco_instances("Nuclei_train", {},
                         json_file=r'HW3_Instance_Segmentation/dataset/annot/train_annotation.json',
                         image_root=r'HW3_Instance_Segmentation/dataset/train')
@@ -10,15 +14,8 @@ register_coco_instances("Nuclei_test", {},
                         image_root=r'HW3_Instance_Segmentation/dataset/test')
 
 # 設定類別
-from detectron2.data import MetadataCatalog
 MetadataCatalog.get("Nuclei_train").thing_classes = ['nuclei']
 MetadataCatalog.get("Nuclei_test").thing_classes = ['nuclei']
-
-import os
-from detectron2.engine import DefaultPredictor
-from detectron2 import model_zoo
-from detectron2.engine import DefaultTrainer
-from detectron2.config import get_cfg
 
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml"))
