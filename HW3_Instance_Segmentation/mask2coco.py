@@ -5,26 +5,30 @@ from pycocotools.mask import encode, area, toBbox
 import os
 import cv2
 import json
+from tqdm import tqdm
 
 # coco format: https://www.immersivelimit.com/tutorials/create-coco-annotations-from-scratch
-Mode = 'train'  # or 'valid'?
-DatasetPath = r'HW3_Instance_Segmentation/dataset/' + Mode
 
-SaveJsonPath = r'HW3_Instance_Segmentation/dataset/annotation.json'
+DatasetPath = r'HW3_Instance_Segmentation/dataset/train'
+
+SaveJsonPath = r'HW3_Instance_Segmentation/dataset/annot/train_annotation.json'
+
+if not os.path.isdir(r'HW3_Instance_Segmentation/dataset/annot'):
+    os.mkdir(r'HW3_Instance_Segmentation/dataset/annot')
+# -----------------------------------------------------------------------------
 
 images = []
 annotations = []
 categories = [{
-    'id': 0,
-    'name': 'null'
-} , {
     'id': 1,
-    'name': 'cuclei'
+    'name': 'nuclei'
 }]
 
 ImageFolders = os.listdir(DatasetPath)  # list of(['TCGA-18-5592-01Z-00-DX1'])
+running_mask_id = 0
 
-for img_id, img_name in enumerate(ImageFolders):
+for img_id, img_name in enumerate(tqdm(ImageFolders)):
+    img_id += 1
     ImageFolder = os.path.join(DatasetPath, img_name)  # path to TCGA-18-5592-01Z-00-DX1/
     ImagePath = os.path.join(ImageFolder, 'images', img_name + '.png')
     MaskFolderPath = os.path.join(ImageFolder, 'masks')
@@ -37,12 +41,12 @@ for img_id, img_name in enumerate(ImageFolders):
         'id': img_id,
         'width': width,
         'height': height,
-        'file_name': os.path.join('Images', img_name + '.png')
+        'file_name': os.path.join(img_name, 'images', img_name + '.png')
     }
     images += [image_data]
     # Process masks
     MaskImagesPath = os.listdir(MaskFolderPath)  # may have other data type
-    for mask_id, mask_name in enumerate(MaskImagesPath):
+    for _, mask_name in enumerate(MaskImagesPath):
         if not mask_name.endswith('.png'):
             continue
         MaskPath = os.path.join(MaskFolderPath, mask_name)
@@ -53,8 +57,9 @@ for img_id, img_name in enumerate(ImageFolders):
         bbox = toBbox(E)
         E['counts'] = E['counts'].decode('UTF-8')
 
+        running_mask_id += 1
         mask_data = {
-            'id': mask_id,
+            'id': running_mask_id,
             'category_id': 1,
             'is_crowd': 0,
             'image_id': img_id,
@@ -63,7 +68,7 @@ for img_id, img_name in enumerate(ImageFolders):
             'bbox': [*bbox]
         }
         annotations += [mask_data]
-    
+
 data = {
     'images': images,
     'annotations': annotations,
