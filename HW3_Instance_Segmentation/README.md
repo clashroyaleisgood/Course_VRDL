@@ -1,5 +1,16 @@
 # Homework3 - Instance Segmentation
 
+You can see report [here](report/report.md) in markdown format, or [pdf](report/VRDL_HW2_309553018_Report.pdf) format which is exported by [Typora](https://typora.io/).
+
+Competetion: https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5
+
+Result mAP:0.5:0.95 on testing dataset: **0.41520**  
+[Details](#result)
+
+with help of [Detectron2](https://github.com/facebookresearch/detectron2)
+
+Model weight: [model_final.pth]()
+
 ## Table of Contents
 
 - [Homework3 - Instance Segmentation](#homework3---instance-segmentation)
@@ -14,6 +25,7 @@
     - [Testing (inference)](#testing-inference)
     - [Training](#training)
   - [Result](#result)
+  - [Reference (helps)](#reference-helps)
 
 ## Environment
 Install CUDA, cuDNN
@@ -116,3 +128,23 @@ The final weights will be saved in `HW3_Instance_Segmentation/exp/model_final.pt
 Then you can use instructions in [Testing](#testing-inference) to predict result and visualize it.
 
 ## Result
+
+
+## Reference (helps)
+Detectron
+- https://github.com/facebookresearch/detectron2
+- https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5#scrollTo=ZyAvNCJMmvFF
+
+COCO format
+- https://www.immersivelimit.com/tutorials/create-coco-annotations-from-scratch
+- https://www.gushiciku.cn/pl/gavr/zh-tw
+- https://www.aiuai.cn/aifarm1578.html
+
+Output format
+- https://github.com/facebookresearch/detectron2/issues/556#issuecomment-968035926
+- https://detectron2.readthedocs.io/en/latest/tutorials/models.html#model-output-format
+
+Model hyper param
+- https://github.com/facebookresearch/detectron2/issues/1045#issuecomment-598542491
+- https://github.com/facebookresearch/detectron2/issues/277
+- https://detectron2.readthedocs.io/en/latest/modules/config.html
