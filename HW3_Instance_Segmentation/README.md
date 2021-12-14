@@ -11,7 +11,7 @@
   - [Model](#model)
   - [Architecture](#architecture)
   - [Train or Test](#train-or-test)
-    - [Testing](#testing)
+    - [Testing (inference)](#testing-inference)
     - [Training](#training)
   - [Result](#result)
 
@@ -42,8 +42,7 @@ Download code with the following command:
 `$ git clone https://github.com/clashroyaleisgood/Course_VRDL.git`
 
 ## Dataset
-Get data from this [competetion](https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5)
-, [Dataset Link](https://drive.google.com/file/d/1nEJ7NTtHcCHNQqUXaoPk55VH3Uwh4QGG/view?usp=sharing)
+Get data from this [competetion](https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5), [Dataset Link](https://drive.google.com/file/d/1nEJ7NTtHcCHNQqUXaoPk55VH3Uwh4QGG/view?usp=sharing)
 
 Put Training data to `HW3_Instance_Segmentation/dataset/`
 ```
@@ -85,15 +84,35 @@ Course_VRDL/
     ├── testdata_coco.py
     │
     ├── exp/
-    │    └── model_final.pth
+    │   └── model_final.pth
     ├── try_train.py
     ├── try_valid.py
     └── vis.py
 ```
 ## Train or Test
-### Testing
+### Testing (inference)
+1. Use the following instruction to predict result
+   ```
+   ~/Course_VRDL$ python HW3_Instance_Segmentation/try_valid.py
+   ```
+   And this will output 2 files
+   - `HW3_Instance_Segmentation/predict_Vis_annotation.json`  
+     predict result for visulize
+   - `HW3_Instance_Segmentation/predict_annotation.json`  
+     predict result for codalab competetion
+
+2. Use the following instruction to Visulize result(based on `HW3_Instance_Segmentation/predict_Vis_annotation.json`)
+   ```
+   ~/Course_VRDL$ python HW3_Instance_Segmentation/vis.py
+   ```
+   And this will output predict results for each testing image in `HW3_Instance_Segmentation/dataset/test/` which is saved in `HW3_Instance_Segmentation/VisJson/`
 
 ### Training
-
+Use the following instruction to train **mask_rcnn_R_101_FPN_3x** fine tuned on this task
+```
+~/Course_VRDL$ python HW3_Instance_Segmentation/try_train.py
+```
+The final weights will be saved in `HW3_Instance_Segmentation/exp/model_final.pth`.
+Then you can use instructions in [Testing](#testing-inference) to predict result and visualize it.
 
 ## Result
