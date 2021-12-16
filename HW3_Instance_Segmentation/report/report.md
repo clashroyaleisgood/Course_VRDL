@@ -1,13 +1,12 @@
-# HW 2
+# HW 3
 Oscar Lin 309553018  
-Project repository: https://github.com/clashroyaleisgood/Course_VRDL/tree/main/HW2_Object_Detection
+Project repository: https://github.com/clashroyaleisgood/Course_VRDL/tree/main/HW3_Instance_Segmentation
 
-Competition: https://competitions.codalab.org/competitions/35888?secret_key=7e3231e6-358b-4f06-a528-0e3c8f9e328e
-
+Competition: https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5
 ___
 ## Table of Contents
 
-- [HW 2](#hw-2)
+- [HW 3](#hw-3)
 	- [Table of Contents](#table-of-contents)
 	- [Introduction](#introduction)
 		- [Result](#result)
