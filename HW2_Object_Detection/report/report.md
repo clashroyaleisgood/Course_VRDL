@@ -75,16 +75,16 @@ validation_percentage: 1/5
 <div style="page-break-after: always;"></div>
 
 ## Experiments
-Firstly I use `--freeze` flag to reduce the learning time and keep the well pretrained previous layers, But result are not good.
+Firstly I use `--freeze` flag to reduce the learning time and keep the well pre-trained previous layers, But result are not good.
 Until I gradually reduce the freeze layer number to **0**, the results are getting better and better.  
 I discovered that, It may take time to train the whole model rather than train the last few layers, but the result will be better because we can train the model to the detail part(first few layers).  
-The pretrained one is good enough, but it's not fit to this task, so we still need to modify the first few layers to get more details about our task.
+The pre-trained one is good enough, but it's not fit to this task, so we still need to modify the first few layers to get more details about our task.
 ___
 
 Then I got struggle with the overfitting problem I guess.
-I have very strange result in my training, both train/valid loss reduce in the begining, then getting smooth.  
-But suddenly reduce again after aound half of the epochs.
-The reduction is getting more and more, and sharply droped at the very end like this:
+I have very strange result in my training, both train/valid loss reduce in the beginning, then getting smooth.  
+But suddenly reduce again after around half of the epochs.
+The reduction is getting more and more, and sharply dropped at the very end like this:
 <img src="train/results_free5_200.png" width="800">  
 same situation happened when I enlarge the epochs to 400  
 <img src="train/results_free5_400.png" width="800">  
@@ -92,8 +92,8 @@ So it's not because of the not yet converge of the model
 
 I have very high mAP in train and valid due to this, but even lower mAP in testing data.
 Then I realized that this is probably an overfitting, though it confuse me a lot that, why the validation data is also getting lower...  
-So I finally decided to **manually** early stop by training with 100 epochs and the same hyperparameters before.
-I early stoped(collect the weights/best.pt rather than directly stop the training) at 33, 40, and 67.
+So I finally decided to **manually** early stop by training with 100 epochs and the same hyper-parameters before.
+I early stopped(collect the weights/best.pt rather than directly stop the training) at 33, 40, and 67.
 Stopping at **33** gives me the highest score at that moment, and **40** also gives me a higher score.
 Things are getting better and better.
 But the result of **67** was worse than **40**, then I known that the loss of train/valid is getting lower again and the strange overfitting problem is happening again.
@@ -101,12 +101,12 @@ But the result of **67** was worse than **40**, then I known that the loss of tr
 <div style="page-break-after: always;"></div>
 
 ## Summary
-In this chalenge, I use yolov5 and the pre-trained weights and finally get **mAP: 0.41520** on testing data provided by the competetion.
+In this challenge, I use yolov5 and the pre-trained weights and finally get **mAP: 0.41520** on testing data provided by the competition.
 
 The strange overfitting problem was bothering me a lot.
 Though I use **manually early stop** to prevent the problem, but it's not a good solution at all, I still can't figure out what is happening then.
 
-It's not a good way but still a effective way using manually earlly stop.
+It's not a good way but still a effective way using manually early stop.
 
 <div style="page-break-after: always;"></div>
 
