@@ -11,8 +11,7 @@ from detectron2.config import get_cfg
 from detectron2.utils.visualizer import ColorMode, Visualizer
 from pycocotools.mask import encode, area, toBbox
 
-For_Vis = False  # maks annot for vis.py
-For_Vis = True
+For_Vis = True  # maks annot for vis.py
 SaveVisJsonPath = r'HW3_Instance_Segmentation/predict_Vis_annotation.json'
 SaveJsonPath = r'HW3_Instance_Segmentation/predict_annotation.json'
 
@@ -28,26 +27,20 @@ MetadataCatalog.get("Nuclei_train").thing_classes = ['nuclei']
 MetadataCatalog.get("Nuclei_test").thing_classes = ['nuclei']
 
 cfg = get_cfg()
-cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml"))
+cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml"))
 
 cfg.INPUT.MASK_FORMAT = 'bitmask'  # added: RLE form
+cfg.INPUT.MIN_SIZE_TEST = 1000
 # cfg.DATASETS.TRAIN = ("Nuclei_train",)
 cfg.DATASETS.TEST = ("Nuclei_test",)
 cfg.DATALOADER.NUM_WORKERS = 4
-# cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
-# cfg.SOLVER.IMS_PER_BATCH = 2
-# cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
-# cfg.SOLVER.MAX_ITER = 1200    # 300 iterations seems good enough for this toy dataset; you will need to train longer for a practical dataset
-# cfg.SOLVER.STEPS = []        # do not decay learning rate
-# cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128   # faster, and good enough for this toy dataset (default: 512)
-# cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1  # only has one class (ballon). (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 # NOTE: this config means the number of classes, but a few popular unofficial tutorials incorrect uses num_classes+1 here.
 
 cfg.SOLVER.CHECKPOINT_PERIOD = 40  # 40 epoch 存一次 weight
 cfg.OUTPUT_DIR = r'HW3_Instance_Segmentation/exp'
 
-cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
+cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_0002099.pth")
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
 cfg.TEST.DETECTIONS_PER_IMAGE = 1000
 predictor = DefaultPredictor(cfg)
@@ -62,13 +55,6 @@ for d in tqdm(dataset_dicts):
     im = cv2.imread(d["file_name"])
     filename = os.path.basename(d["file_name"])
     outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
-    # v = Visualizer(im[:, :, ::-1],
-    #                metadata=MetadataCatalog.get('Nuclei_train'),
-    #                scale=0.5,
-    #                instance_mode=ColorMode.IMAGE_BW   # remove the colors of unsegmented pixels. This option is only available for segmentation models
-    # )
-    # out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-    # cv2.imwrite(f'output_infer/{filename}', out.get_image()[:, :, ::-1])
 
     masks = outputs["instances"].to("cpu")
     bbox = masks.pred_boxes.tensor.numpy()  # (N, 4): [left, top, width, height]
@@ -108,7 +94,3 @@ if For_Vis:
 
 with open(SaveJsonPath, 'w') as file:
     json.dump(coco_form_mask, file)
-
-    # rects = outputs["instances"][outputs["instances"].pred_classes == 0].pred_boxes.tensor.cpu().numpy()
-    # scores = outputs["instances"][outputs["instances"].pred_classes == 0].scores.tolist()
-    # classes = outputs["instances"][outputs["instances"].pred_classes == 0].pred_classes.tolist()
