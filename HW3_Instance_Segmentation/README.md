@@ -4,8 +4,7 @@ You can see report [here](report/report.md) in markdown format, or [pdf](report/
 
 Competetion: https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5
 
-Result mAP:0.5:0.95 on testing dataset: **0.41520**  
-[Details](#result)
+Result score on testing dataset: **0.24303**
 
 with help of [Detectron2](https://github.com/facebookresearch/detectron2)
 
@@ -24,7 +23,6 @@ Model weight: [model_final.pth]()
   - [Train or Test](#train-or-test)
     - [Testing (inference)](#testing-inference)
     - [Training](#training)
-  - [Result](#result)
   - [Reference (helps)](#reference-helps)
 
 ## Environment
@@ -54,7 +52,7 @@ Download code with the following command:
 `$ git clone https://github.com/clashroyaleisgood/Course_VRDL.git`
 
 ## Dataset
-Get data from this [competetion](https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5), [Dataset Link](https://drive.google.com/file/d/1nEJ7NTtHcCHNQqUXaoPk55VH3Uwh4QGG/view?usp=sharing)
+Get data from this [competition](https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5), [Dataset Link](https://drive.google.com/file/d/1nEJ7NTtHcCHNQqUXaoPk55VH3Uwh4QGG/view?usp=sharing)
 
 Put Training data to `HW3_Instance_Segmentation/dataset/`
 ```
@@ -80,7 +78,7 @@ Course_VRDL/
 reference: [COCO format](https://cocodataset.org/#format-data)
 
 ## Model
-Get weight with this [link]()  
+Get weight with this [link](https://drive.google.com/file/d/18EZakC0NJaug1ivVOW-O1IAuF7rJYSms/view?usp=sharing)  
 Put model file to `Course_VRDL/HW3_Instance_Segmentation/exp/model_final.pth`
 
 ## Architecture
@@ -109,11 +107,11 @@ Course_VRDL/
    ```
    And this will output 2 files
    - `HW3_Instance_Segmentation/predict_Vis_annotation.json`  
-     predict result for visulize
+     predict result for visualize
    - `HW3_Instance_Segmentation/predict_annotation.json`  
-     predict result for codalab competetion
+     predict result for codalab competition
 
-2. Use the following instruction to Visulize result(based on `HW3_Instance_Segmentation/predict_Vis_annotation.json`)
+2. Use the following instruction to Visualize result(based on `HW3_Instance_Segmentation/predict_Vis_annotation.json`)
    ```
    ~/Course_VRDL$ python HW3_Instance_Segmentation/vis.py
    ```
@@ -127,11 +125,8 @@ Use the following instruction to train **mask_rcnn_R_101_FPN_3x** fine tuned on 
 The final weights will be saved in `HW3_Instance_Segmentation/exp/model_final.pth`.
 Then you can use instructions in [Testing](#testing-inference) to predict result and visualize it.
 
-## Result
-
-
 ## Reference (helps)
-Detectron
+Detectron2
 - https://github.com/facebookresearch/detectron2
 - https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5#scrollTo=ZyAvNCJMmvFF
 
