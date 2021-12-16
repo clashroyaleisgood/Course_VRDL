@@ -2,7 +2,7 @@
 
 You can see report [here](report/report.md) in markdown format, or [pdf](report/VRDL_HW3_309553018_Report.pdf) format which is exported by [Typora](https://typora.io/).
 
-Competetion: https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5
+Competition: https://codalab.lisn.upsaclay.fr/competitions/333?secret_key=3b31d945-289d-4da6-939d-39435b506ee5
 
 Result score on testing dataset: **0.24303**
 
