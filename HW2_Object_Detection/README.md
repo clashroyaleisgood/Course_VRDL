@@ -2,7 +2,7 @@
 
 You can see report [here](report/report.md) in markdown format, or [pdf](report/VRDL_HW2_309553018_Report.pdf) format which is exported by [Typora](https://typora.io/).
 
-Competetion: https://competitions.codalab.org/competitions/35668
+Competition: https://competitions.codalab.org/competitions/35668
 
 Result mAP:0.5:0.95 on testing dataset: **0.41520**  
 Result inference speed on testing dataset: **0.0948s** per image  
@@ -54,7 +54,7 @@ director/
 ```
 
 ## Dataset
-Get data from this [competetion](https://competitions.codalab.org/competitions/35888?secret_key=7e3231e6-358b-4f06-a528-0e3c8f9e328e)
+Get data from this [competition](https://competitions.codalab.org/competitions/35888?secret_key=7e3231e6-358b-4f06-a528-0e3c8f9e328e)
 , [Dataset Link](https://drive.google.com/drive/folders/1aRWnNvirWHXXXpPPfcWlHQuzGJdXagoc?usp=sharing)
 
 - Train Data  
@@ -123,7 +123,7 @@ director/
 
 ## Train or Test
 ### Testing
-1. Inference: detect images in test_images/ with pretrained weights
+1. Inference: detect images in test_images/ with pre-trained weights
 ```
 ~/yolov5$ python detect.py \
                 --weights ../Course_VRDL/HW2_Object_Detection/MODEL.pt \
@@ -142,10 +142,10 @@ detect result will be stored in `yolov5/runs/detect/exp?/labels`
 change the line 6 of parse_predict_result.py, the exp is depend on the previous step.  
 `ResultPath = r'../yolov5/runs/detect/exp/labels'`
 
-atfer correcting the exp?, you can exectute the following command to get the result  
+atfer correcting the exp?, you can execute the following command to get the result  
 `~/Course_VRDL$ python HW2_Object_Detection/parse_predict_result.py`
 
-the result is sotored in `HW2_Object_Detection/answer.json`  
+the result is stored in `HW2_Object_Detection/answer.json`  
 you can also change to which director you want in line 8 of `parse_predict_result.py`  
 `DumpJsonPath = r'HW2_Object_Detection/answer.json'`
 
@@ -160,11 +160,11 @@ you can also change to which director you want in line 8 of `parse_predict_resul
             --data ../Course_VRDL/HW2_Object_Detection/HW2_dataset/dataset.yaml \
             --weights yolov5m.pt
 
-# if you don't have enough memory, just reduce the batchsize
+# if you don't have enough memory, just reduce the batch size
 ```
 > take the weights out earlier when epoch goes to **40**  
 > copy weights from `yolov5/runs/train/exp?/weights/best.pt`
-> save to `Course_VRDL/HW2_Object_Detection/MODEL.pt` or wherever you want(just remenber the director)
+> save to `Course_VRDL/HW2_Object_Detection/MODEL.pt` or wherever you want(just remember the director)
 
 > ~~the result will be stored in `yolov5/runs/train/exp?/`~~  
 > ~~the weights we use is stored in `yolov5/runs/train/exp?/weights/best.pt`~~  
