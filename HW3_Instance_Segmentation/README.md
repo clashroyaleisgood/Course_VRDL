@@ -8,7 +8,7 @@ Result score on testing dataset: **0.24303**
 
 with help of [Detectron2](https://github.com/facebookresearch/detectron2)
 
-Model weight: [model_final.pth]()
+Model weight: [model_final.pth](https://drive.google.com/file/d/18EZakC0NJaug1ivVOW-O1IAuF7rJYSms/view?usp=sharing)
 
 ## Table of Contents
 
