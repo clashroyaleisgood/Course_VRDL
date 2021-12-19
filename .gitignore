@@ -145,6 +145,7 @@ HW2_Object_Detection/answer.json
 
 HW3_Instance_Segmentation/test.py
 HW3_Instance_Segmentation/dataset/
+HW3_Instance_Segmentation/EXP/
 
 *.zip
 *.jpg
