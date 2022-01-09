@@ -147,6 +147,8 @@ HW3_Instance_Segmentation/test.py
 HW3_Instance_Segmentation/dataset/
 HW3_Instance_Segmentation/EXP/
 
+HW4_Super_Resolution/datasets/
+
 *.zip
 *.jpg
 
