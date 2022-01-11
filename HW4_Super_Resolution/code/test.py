@@ -44,14 +44,14 @@ if __name__ == '__main__':
             image = pil_image.open(os.path.join(args.folder, name)).convert('RGB')
             images += [image]
             paths += [
-                os.path.join(args.folder, '3x', name)
+                os.path.join(args.folder, '3x', name.replace('.', '_pred.'))
             ]
 
     elif args.image_file:
         image = pil_image.open(args.image_file).convert('RGB')
         images += [image]
         paths += [
-            os.path.join(args.folder, '3x', args.image_file)
+            os.path.join(args.folder, '3x', args.image_file.replace('.', '_pred.'))
         ]
 
         image_width = (image.width // args.scale) * args.scale
