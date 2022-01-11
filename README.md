@@ -9,3 +9,6 @@
 
 ## Homework3 - Instance Segmentation
 [Instance Segmentation](https://github.com/clashroyaleisgood/Course_VRDL/tree/main/HW3_Instance_Segmentation)
+
+## Homework4 - Super Resolution
+[Super Resolution](https://github.com/clashroyaleisgood/Course_VRDL/tree/main/HW4_Super_Resolution)
