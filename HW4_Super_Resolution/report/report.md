@@ -71,6 +71,7 @@ Optimizer: Adam
 |-|-|-|
 | 17 |  |  |
 | 50 | 29.70 | 27.4265 |
+
 with other hyper-parameters: batch size 8, learning rate 1e-3, epoch 300
 
 ### Smaller the batch size
@@ -86,12 +87,14 @@ This conclusion is also useful to another strange place: smaller learning rate l
 | 32 | 29.63 | 27.3675 |
 | 16 | 29.68 | 27.4135 |
 | 8 | 29.70 | **27.4265** |
+
 with other hyper-parameters: learning rate 1e-3, epoch 300, patch 50, stride 15
 
 | Learning Rate | validation set PSNR | test image PSNR(google drive score) |
 |-|-|-|
 | 1e-3 | 29.63 | 27.3675 |
 | 1e-4 | 29.37 | 27.0596 |
+
 with other hyper-parameters: batch size 32, epoch 300, patch 50, stride 15
 
 <div style="page-break-after: always;"></div>
