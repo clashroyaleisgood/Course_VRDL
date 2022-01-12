@@ -67,9 +67,11 @@ Optimizer: Adam
 
 ### Enlarge the cropped image size
 
+Large cropped image size leads to a better score.
+
 | Patch Size | validation set PSNR | test image PSNR(google drive score) |
 |-|-|-|
-| 17 |  |  |
+| 17 | 29.62 | X |
 | 50 | 29.70 | 27.4265 |
 
 with other hyper-parameters: batch size 8, learning rate 1e-3, epoch 300
@@ -79,7 +81,6 @@ Here I found a interesting place that smaller batch size will get a better PSNR 
 This is counterintuitive that we often want to use as large as possible to accelerate the training process
 and also let gradient direction more close to global minimum.  
 In my opinion, this is because the randomness of the small batch size gradient decent will prevent model from overfitting.  
-This conclusion is also useful to another strange place: smaller learning rate leads to a worse performance.
 
 | Batch Size | validation set PSNR | test image PSNR(google drive score) |
 |-|-|-|
@@ -87,8 +88,12 @@ This conclusion is also useful to another strange place: smaller learning rate l
 | 32 | 29.63 | 27.3675 |
 | 16 | 29.68 | 27.4135 |
 | 8 | 29.70 | **27.4265** |
+| 2 (epoch=500) | 29.69 | 27.3994 |
 
 with other hyper-parameters: learning rate 1e-3, epoch 300, patch 50, stride 15
+but extreme small size like 2 batch size seems not to work well.
+
+This conclusion is also useful to another strange place: smaller learning rate leads to a worse performance.
 
 | Learning Rate | validation set PSNR | test image PSNR(google drive score) |
 |-|-|-|
