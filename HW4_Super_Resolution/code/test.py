@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     model.eval()
 
-    images = [] # list([img, path])
+    images = []  # list([img, path])
     paths = []
     if args.folder:
         os.makedirs(os.path.join(args.folder, '3x'), exist_ok=True)
