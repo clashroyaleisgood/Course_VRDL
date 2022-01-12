@@ -19,8 +19,6 @@ ___
   - [Summary](#summary)
 
 
-<div style="page-break-after: always;"></div>
-
 ## Introduction
 This challenge is super resolution which is a famous, useful, and interesting topic in CV region.
 We all know that downscale is very simple, just calculating the pixel values,
@@ -31,6 +29,7 @@ times of convolution layers, by GAN or other methods.
 ### Result
 PSNR: **27.4265**  
 ![](PSNR/final.png)
+![](PSNR/codalab.png)
 
 <div style="page-break-after: always;"></div>
 
