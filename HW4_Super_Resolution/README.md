@@ -64,7 +64,7 @@ Course_VRDL/HW4_Super_Resolution/
 
 
 ## Model
-Get weight with this [link]()  
+Get weight with this [link](https://drive.google.com/file/d/1R4Vjkuz-_aKssFjzoG9PfsJKE1yAUe0Z/view?usp=sharing)  
 Put model file to `ESPCN-pytorch/output/3x/best.pth`
 
 ## Architecture
